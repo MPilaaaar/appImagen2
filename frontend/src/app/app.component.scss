@@ -1,0 +1,23 @@
+.plantilla {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 2fr 9fr 1fr;
+    grid-template-columns: 12fr;
+    grid-template-areas: "cabecera" "cuerpo" "pie";
+} 
+
+.cabecera {
+    grid-area: cabecera;
+    background-color: lightgreen;
+}
+
+.cuerpo {
+    grid-area: cuerpo;
+    background-color: lightblue;
+}
+
+.pie {
+    grid-area: pie;
+    background-color: lightgreen;
+}
