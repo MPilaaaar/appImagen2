@@ -8,13 +8,11 @@ import { CanActivate, Router } from '@angular/router';
 
 export class GLoginUserGuard implements CanActivate {
   constructor(private miservicio: MimodeloService, private router: Router) {
-   
 
   }
 
   canActivate(): boolean {
     if (this.miservicio.logIn()) {
-      
       return true;
     }
     this.router.navigate(['login']);
