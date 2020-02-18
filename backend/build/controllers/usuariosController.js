@@ -13,6 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("../database"));
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const SECRET_KEY = 'MiClaveSrecreta1234';
 class UsuariosController {
     index(req, res) {
         res.json({ 'message': 'Estás en usuarios' });
@@ -43,6 +46,28 @@ class UsuariosController {
         return __awaiter(this, void 0, void 0, function* () {
             const usuario = yield database_1.default.query('SELECT * FROM usuarios WHERE id=?', [req.params.id]);
             res.json(usuario);
+        });
+    }
+    readlogin(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            // console.log(req.body);
+            const copiaUsuario = {
+                nombre: req.body.nombre,
+                imagen: req.body.imagen
+            };
+            const usuario = yield database_1.default.query('SELECT * FROM usuarios WHERE nombre=? AND imagen=?', [req.body.nombre, req.body.imagen]);
+            console.log(usuario);
+            console.log(usuario.length);
+            if (usuario.length == 0) {
+                res.json({ message: 'Error al loguearse.' });
+            }
+            else {
+                // res.json(usuario);
+                const expiresIn = 24 * 60 * 60;
+                const accessToken = jwt.sign({ id: copiaUsuario.nombre }, SECRET_KEY, { expiresIn: expiresIn });
+                console.log(accessToken);
+                res.json(accessToken);
+            }
         });
     }
 }

@@ -1,0 +1,37 @@
+.contenedor_tabla {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 12fr;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.titulo {
+    text-align: center;
+}
+
+.fila {
+    width: 80%;
+    display: grid;
+    grid-template-columns: 2fr 5fr 5fr;
+    grid-template-areas: "id nombre imagen";
+}
+
+.fila_id {
+    grid-area: id;
+}
+
+.fila_nombre {
+    grid-area: nombre;
+}
+
+.fila_imagen {
+    grid-area: imagen;
+}
+
+// table {
+//     width: 100%;
+//   }
+  

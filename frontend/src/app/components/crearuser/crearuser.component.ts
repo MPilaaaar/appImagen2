@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MimodeloService } from 'src/app/services/mimodelo.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Mimodelo } from 'src/app/modelo/mimodelo';
 
 @Component({
@@ -10,13 +10,15 @@ import { Mimodelo } from 'src/app/modelo/mimodelo';
 })
 export class CrearuserComponent implements OnInit {
 
-  private formuser: FormGroup;
+  public formuser: FormGroup;
   public usuarios: Mimodelo;
+
+  private patronemail = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$';
 
   constructor(private formBuilder: FormBuilder, private mimodeloService: MimodeloService) {
     this.formuser = formBuilder.group({
-      nombre: [],
-      imagen: []
+      nombre: ['', [Validators.required, Validators.minLength(6)]],
+      imagen: ['', [Validators.required, Validators.pattern(this.patronemail)]]
     });
    }
 
@@ -32,5 +34,11 @@ export class CrearuserComponent implements OnInit {
       }
     );
   }
+  get nombre() {
+    return this.formuser.get('nombre');
+  }
 
+  get imagen() {
+    return this.formuser.get('imagen');
+  }
 }

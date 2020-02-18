@@ -1,0 +1,27 @@
+<h1>LOGIN</h1>
+<div class="fichaLogin">
+    <form [formGroup]="formlogin" (submit)="submit()">
+        Nombre: <input type="text" formControlName="nombre">
+        <br>
+        <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched) ">
+            <div *ngIf="nombre.errors.required">
+                El nombre es obligatorio
+            </div>
+            <div *ngIf="nombre.errors.minlength">
+                El nombre tiene que tener más de 6 caracteres
+            </div>
+        </div>
+        <br>
+        Imagen: <input type="text" formControlName="imagen">
+        <div *ngIf="imagen.invalid && (imagen.dirty || imagen.touched) ">
+            <div *ngIf="imagen.errors.required">
+                La imagen es obligatoria
+            </div>
+            <div *ngIf="imagen.errors.pattern">
+                La imagen tiene que cumplir unos requisitos
+            </div>
+        </div>
+        <br>
+        <button type="submit" [disabled]="!formlogin.valid" >Enviar</button>
+    </form>
+</div>

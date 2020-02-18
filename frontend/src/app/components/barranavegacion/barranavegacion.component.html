@@ -5,9 +5,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" routerLink="/home">Home <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" routerLink="/crearuser" >Crear Usuario</a>
-            <a class="nav-item nav-link" routerLink="/leeruser" >Listar Usuarios</a>
+            <ng-container *ngIf="mimodeloservice.logIn(); else loggedOut">
+                <a class="nav-item nav-link" routerLink="/crearuser" >Crear Usuario</a>
+                <a class="nav-item nav-link" routerLink="/leeruser" >Listar Usuarios</a>
+                <a class="nav-item nav-link" routerLink="/home" (click)="mimodeloservice.logOut()" >Logout</a>
+            </ng-container>
+            <ng-template #loggedOut>
+                <a class="nav-item nav-link active" routerLink="/home">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" routerLink="/login" >Login</a>
+            </ng-template>
         </div>
     </div>
 </nav>
